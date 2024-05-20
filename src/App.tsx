@@ -1,15 +1,25 @@
 
-import './App.css'
-import {Input} from '@/components/ui/input'
-import { Button } from './components/ui/button'
+import './App.css';
+import { Input } from '@/components/ui/input';
+import usePokemonData from './hooks/usePokemonData';
+import PokemonList from './components/Container/PokemonList.tsx';
+import { PaginatedResult } from './interfaces/api.ts';
+
 
 function App() {
+  const { data, error, loading } = usePokemonData();
+
+  if (loading) {
+    return <p>Loading pokemon data..</p>
+  }
+
+  if (error) { return <p>An error has occured loading pokemon data..</p> }
 
   return (
     <>
       <h1>React App</h1>
-      <Input placeholder='simple input'/>
-      <Button>Simple Button</Button>
+      <Input placeholder='simple input' />
+      <PokemonList pokemons={data?.results} />
     </>
   )
 }
