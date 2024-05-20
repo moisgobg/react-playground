@@ -1,17 +1,15 @@
-import { useState } from 'react'
+
 import './App.css'
+import {Input} from '@/components/ui/input'
+import { Button } from './components/ui/button'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
+      <h1>React App</h1>
+      <Input placeholder='simple input'/>
+      <Button>Simple Button</Button>
     </>
   )
 }
