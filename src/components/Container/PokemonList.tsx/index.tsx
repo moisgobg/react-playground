@@ -7,6 +7,8 @@ interface IPokemonListProps {
 }
 
 const PokemonList: React.FC<IPokemonListProps> = (props) => {
+    if (!props.pokemons) return <p>Not results</p>
+
     return (
         <table>
             <thead>

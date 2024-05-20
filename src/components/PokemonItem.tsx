@@ -1,6 +1,7 @@
 import { useFetchPokemonDetails } from "@/hooks/useFetchPokemonDetails";
 import PokemonDetailsModal from "./Modal/PokemonDetailsModal";
 import { useState } from "react";
+import usePokemonData from "@/hooks/usePokemonData";
 
 interface IPokemonItemProps {
     name: string;
@@ -10,6 +11,7 @@ interface IPokemonItemProps {
 
 const PokemonItem: React.FC<IPokemonItemProps> = (props) => {
     const { data, error, loading } = useFetchPokemonDetails(props.url);
+    const {deletePokemon} = usePokemonData();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     if (loading) {
@@ -34,8 +36,8 @@ const PokemonItem: React.FC<IPokemonItemProps> = (props) => {
 
     return (
         <>
-        <tr onClick={handleClick}>
-            <td>{data?.id}</td>
+        <tr>
+            <td onClick={handleClick}>{data?.id}</td>
             <td>{props.name}</td>
             <td>{data?.weight}</td>
             <td>{data?.height}</td>
@@ -45,7 +47,7 @@ const PokemonItem: React.FC<IPokemonItemProps> = (props) => {
             <td>
                 <img src={data?.sprites.back_default} alt="back_default" />
             </td>
-            <td>x</td>
+            <td onClick={() => deletePokemon(props.name)}>x</td>
         </tr>
         <PokemonDetailsModal 
             isOpen={isModalOpen}
