@@ -13,4 +13,5 @@
 .content {
     background-color: white;
     max-height: 100vh;
+    max-width: 50vh;
 }

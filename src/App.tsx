@@ -4,11 +4,15 @@ import { Input } from '@/components/ui/input';
 import usePokemonData from './hooks/usePokemonData';
 import PokemonList from './components/Container/PokemonList.tsx';
 import { useMemo, useState } from 'react';
+import PokemonCarouselModal from './components/Modal/PokemonCarouselModal/index.tsx';
+import { Button } from './components/ui/button.tsx';
+
 
 
 function App() {
-  const { data, error, loading} = usePokemonData();
+  const { data, error, loading } = usePokemonData();
   const [name, setName] = useState<string>("");
+  const [isCarouselOpen, setIsCarouselOpen] = useState(false);
 
   const handleInputChange: React.FormEventHandler<HTMLInputElement> = (e) => {
     const target = e.target as HTMLInputElement;
@@ -32,8 +36,14 @@ function App() {
   return (
     <>
       <h1>React App</h1>
-      <Input placeholder='simple input' onInput={handleInputChange}/>
+      <Input placeholder='simple input' onInput={handleInputChange} />
+      <Button onClick={() => setIsCarouselOpen(true)}>Open Carousel</Button>
       <PokemonList pokemons={filtered} />
+      <PokemonCarouselModal
+        pokemons={filtered}
+        isOpen={isCarouselOpen}
+        onClose={() => setIsCarouselOpen(false)}
+      />
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export const useFetch = <T>(
   fetchFunction: () => Promise<T>
@@ -7,8 +7,8 @@ export const useFetch = <T>(
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = useCallback(
+    async () => {
       setLoading(true);
       try {
         const result = await fetchFunction();
@@ -18,10 +18,13 @@ export const useFetch = <T>(
       } finally {
         setLoading(false);
       }
-    };
+    },
+    [fetchFunction]
+  );
 
+  useEffect(() => {
     fetchData();
-  }, [fetchFunction]);
+  }, [fetchData]);
 
   return { data, loading, error };
 };
