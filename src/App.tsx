@@ -3,7 +3,6 @@ import './App.css';
 import { Input } from '@/components/ui/input';
 import usePokemonData from './hooks/usePokemonData';
 import PokemonList from './components/Container/PokemonList.tsx';
-import { PaginatedResult } from './interfaces/api.ts';
 
 
 function App() {

@@ -11,9 +11,15 @@ const ModalBase: React.FC<IModalBaseProps> = ({children, isOpen, onClose}) => {
 
   if (!isOpen) return null;
 
+  const handleBackdropClick = (event: React.MouseEvent) => {
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     createPortal(
-      <div className={styles.container}>
+      <div className={styles.container} onClick={handleBackdropClick}>
         <div onClick={() => onClose()}>X</div>
         <div className={styles.content}>
           {children}

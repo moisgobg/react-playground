@@ -10,12 +10,19 @@ export interface PaginatedResult {
     url: string;
 }
 
-export interface PokemonDetails {
-    id: string;
+export interface Pokemon {
+    base_experience: number;
     height: number;
+    id: number;
+    is_default: boolean;
+    location_area_encounters: string;
+    name: string;
+    order: number;
     weight: number;
-    sprites: {
-        front_default: string;
-        back_default: string;
-    }
+    sprites: Sprites;
+}
+
+export interface Sprites {
+    back_default: string;
+    front_default: string;
 }
